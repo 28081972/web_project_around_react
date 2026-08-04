@@ -1,63 +1,23 @@
 import { useState } from 'react'
-import logo from './images/logo.svg'
-import avatar from './images/avatar.jpg'
 
+import Header from './components/Header/Header'
+import Main from './components/Main/Main'
+import Footer from './components/Footer/Footer'
 import './App.css'
 
 function App() {
 
-
   return (
     <>
-    <div className="page__content">
-      <header className="header page__section">
-        <img alt="Logotipo Around The U.S."
-          className="logo header__logo"
-          src={logo}/>
-          
-      </header>
-      
-    
-      <main className="content">
-        <section className="profile page__section">
-          <div className="profile__avatar">
-          <img className="profile__image" src={avatar} alt="Avatar"/>
-          <button
-              aria-label="Editar avatar"
-              className="profile__image-edit-button"
-              type="button" >
-            </button>
-          </div>
-          <div className="profile__info">
-            <h1 className="profile__title">Jacques Cousteau</h1>
-            <button
-              aria-label="Editar perfil"
-              className="profile__edit-button"
-              type="button"
-            ></button>
-            <p className="profile__description">Explorador</p>
-          </div>
-          <button
-            aria-label="Agregar tarjeta"
-            className="profile__add-button"
-            type="button"
-          ></button>
-          </section>
-          
-          
+       <div className="page__content">
+        <Header/>
+        <Main/>
+        <Footer/>
+        </div>
         
-          <section className="cards page__section">
-          <ul className="cards__list">
-            
-          </ul>
-        </section>
-      </main>
-      <footer className="footer page__section">
-        <p className="footer__copyright">© 2025 Around The U.S.</p>
-      </footer>
-    </div>
     </>
   )
+  
 }
 
 export default App

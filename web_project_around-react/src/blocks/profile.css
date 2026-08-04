@@ -93,7 +93,7 @@
   transition: opacity 0.3s;
   width: 120px;
   height: 120px;
-  background: transparent url("../../images/updateavatar-icon.svg") center no-repeat;
+  background: transparent url("../images/updateavatar-icon.svg") center no-repeat;
 }
 
 .profile__image-edit-button:hover {
