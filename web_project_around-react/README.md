@@ -1,16 +1,42 @@
-# React + Vite
+# Tripleten web_project_around_react
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
+Around es una aplicación web desarrollada con React como parte de la culminación del sprint 14 de TripleTen.
 
-Currently, two official plugins are available:
+El proyecto consiste en una red social sencilla, donde los usuarios pueden visualizar un perfil y una colección de tarjetas con imágenes y titulos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funcionalidades actuales
+Actualmente la aplicación cuenta con las siguientes funcionalidades:
 
-## React Compiler
+- Renderizado de Header con logotipo
+- Renderizado de la sección principal del Perfil
+- Visualización del avatar y descripción del perfil
+- Botón para editar el perfil
+- Botón para agregar nuevas tarjetas
+- Botón para modificar el avatar
+- Apertura y cierre de los modales correspondientes
+- Renderizado de tarjetas con imágenes y titulos
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Aun está pendiente la implementación de las funcionalidades de los modales y tarjetas.
 
-## Expanding the ESLint configuration
+## Estructura del proyecto
+El proyecto esta siendo migrado de la versión original en JavaScript a React.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Los principales componentes utilizados son: 
+- App
+- Header
+- Main
+- Card
+- Popup
+- ImagePopup
+- Footer
+
+## Ejecución del proyecto
+Para ejecutar el proyecto localmente:
+
+npm run dev
+
+
+Autor:
+
+Roger Villegas
