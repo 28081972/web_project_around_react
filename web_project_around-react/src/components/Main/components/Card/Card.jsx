@@ -1,10 +1,20 @@
+import { Children } from "react";
+import ImagePopup from "../ImagePopup/ImagePopup";
+
 export default function Card(props) {
 
   const {name, link, isLiked} = props.card;
+  const {handleOpenPopup} = props
+  const imageComponent = {name:name, link:link}
+ 
+  
+  
   return (
 
     <li className="card">
-      <img className="card__image" src={link} alt=" " />
+      <img className="card__image" src={link} alt={name} 
+      onClick={() => handleOpenPopup(imageComponent)}/>
+     
       <button
         aria-label="Eliminar tarjeta"
         className="card__delete-button"

@@ -5,6 +5,7 @@ import EditProfile from './components/form/EditProfile/EditProfile';
 import EditAvatar from './components/form/EditAvatar/EditAvatar';
 import Popup from './components/Popup/Popup';
 import Card from './components/Card/Card';
+import ImagePopup from './components/ImagePopup/ImagePopup';
 
 const cards = [
   {
@@ -35,7 +36,7 @@ function Main () {
     const newCardPopup = {title: "Nuevo Lugar", children: <NewCard/>};
     const editProfilePopup = {title: "Editar Perfil", children: <EditProfile/>};
     const editAvatarPopup = {title: "¿Estás seguro/a?", children: <EditAvatar/>}; 
-
+    
 function handleOpenPopup(popup) {
     setPopup(popup);
 }    
@@ -77,17 +78,25 @@ function handleClosePopup(popup) {
                 <section className="cards page__section">
                     <ul className="cards__list">
                         {cards.map ((card) => (
-                            <Card key={card._id} card={card} />
+                            <Card key={card._id} card={card} handleOpenPopup={handleOpenPopup} />
                         ))}
             
                     </ul>
                 </section>
 
                 {popup && (
+                   <>
                     <Popup onClose={handleClosePopup} title={popup.title}>
-                        {popup.children}
+                        {popup.children || <ImagePopup card={popup}/> }
                     </Popup>
+                    
+                   
+                    </>
                 )}
+
+                
+               
+                
             </main>
         
     )
