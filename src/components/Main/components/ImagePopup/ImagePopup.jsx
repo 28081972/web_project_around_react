@@ -5,9 +5,12 @@ const {name, link} = props.card
 
   return (
     
-    
-    <img className="card__image" src={link} alt={name}/>
-    
+    <>
+    <img className="popup__image" 
+      src={link}
+      alt={name}/>
+    <p className="popup__caption">{name} </p>
+    </>
  
     
     

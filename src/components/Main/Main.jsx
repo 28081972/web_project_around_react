@@ -1,4 +1,4 @@
-import {Children, useState} from 'react'
+import {useState} from 'react'
 import avatar from '../../images/avatar.jpg'
 import NewCard from './components/form/NewCard/NewCard';
 import EditProfile from './components/form/EditProfile/EditProfile';
@@ -35,13 +35,13 @@ function Main () {
 
     const newCardPopup = {title: "Nuevo Lugar", children: <NewCard/>};
     const editProfilePopup = {title: "Editar Perfil", children: <EditProfile/>};
-    const editAvatarPopup = {title: "¿Estás seguro/a?", children: <EditAvatar/>}; 
+    const editAvatarPopup = {title: "Cambiar foto de perfil", children: <EditAvatar/>};
     
 function handleOpenPopup(popup) {
     setPopup(popup);
 }    
 
-function handleClosePopup(popup) {
+function handleClosePopup() {
     setPopup(null);
 }
 
@@ -85,13 +85,11 @@ function handleClosePopup(popup) {
                 </section>
 
                 {popup && (
-                   <>
+                   
                     <Popup onClose={handleClosePopup} title={popup.title}>
-                        {popup.children || <ImagePopup card={popup}/> }
+                        {popup.children}
                     </Popup>
                     
-                   
-                    </>
                 )}
 
                 
