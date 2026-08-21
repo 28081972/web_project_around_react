@@ -5,7 +5,6 @@ import EditProfile from './components/form/EditProfile/EditProfile';
 import EditAvatar from './components/form/EditAvatar/EditAvatar';
 import Popup from './components/Popup/Popup';
 import Card from './components/Card/Card';
-import ImagePopup from './components/ImagePopup/ImagePopup';
 
 const cards = [
   {

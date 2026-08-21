@@ -18,9 +18,10 @@ function EditProfile () {
               maxLength="40"
 
             />
-            </label>
+            
             <span className="popup__input-error name-input-error"
             id="profile-name-error"></span>
+          </label>  
 
             <label>
             <input
@@ -33,9 +34,10 @@ function EditProfile () {
               minLength="2"
               maxLength="200"
             />
-            </label>
+            
             <span className="popup__input-error description-input-error"
             id="profile-description-error"></span>
+          </label>  
 
             <button className="button popup__button" type="submit">Guardar</button>
           </form>

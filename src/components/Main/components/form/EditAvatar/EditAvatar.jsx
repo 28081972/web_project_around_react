@@ -5,6 +5,7 @@ function EditAvatar() {
     return (
 
         <form className="popup__form" noValidate>
+          <label>  
             <input
               className="popup__input popup__input_type_url"
               id="avatar-link"
@@ -15,6 +16,7 @@ function EditAvatar() {
             />
             <span className="popup__input-error avatar-input-error"
             id="avatar-link-error"></span>
+          </label>    
             <button className="button popup__button" type="submit">Guardar</button>
           </form>
 

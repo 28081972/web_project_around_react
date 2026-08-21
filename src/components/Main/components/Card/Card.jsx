@@ -8,7 +8,7 @@ export default function Card(props) {
   const {handleOpenPopup} = props
   const imageComponent = {name:name, link:link};
   const imagePopup = {children: <ImagePopup card={imageComponent}/>};
-  const removeCard = {title: " ",children: <RemoveCard/>};
+  const removeCard = {title: "¿Estás seguro/a?",children: <RemoveCard/>};
  
   
   
