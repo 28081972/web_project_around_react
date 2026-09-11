@@ -1,34 +1,27 @@
-import {useState} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import avatar from '../../images/avatar.jpg'
 import NewCard from './components/form/NewCard/NewCard';
 import EditProfile from './components/form/EditProfile/EditProfile';
 import EditAvatar from './components/form/EditAvatar/EditAvatar';
 import Popup from './components/Popup/Popup';
 import Card from './components/Card/Card';
-
-const cards = [
-  {
-    isLiked: false,
-    _id: '5d1f0611d321eb4bdcd707dd',
-    name: 'Yosemite Valley',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:10:57.741Z',
-  },
-  {
-    isLiked: false,
-    _id: '5d1f064ed321eb4bdcd707de',
-    name: 'Lake Louise',
-    link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg',
-    owner: '5d1f0611d321eb4bdcd707dd',
-    createdAt: '2019-07-05T08:11:58.324Z',
-  },
-];
-
-console.log(cards);
+import {api} from '../../utils/api';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 
 function Main () {
+
+    const [cards, setCards] = useState([]);
+
+    useEffect(() => {
+        api.getInitialCards()
+        .then((data) => {
+            setCards(data);
+        });
+    }, []);
+
+   const contextValue = useContext(CurrentUserContext);
+    console.log(contextValue);
 
     const [popup, setPopup]  = useState(null);
 
@@ -48,7 +41,7 @@ function handleClosePopup() {
             <main className="content">
                 <section className="profile page__section">
                     <div className="profile__avatar">
-                        <img className="profile__image" src={avatar} alt="Avatar"/>
+                        <img className="profile__image" src={contextValue?.avatar} alt="Avatar"/>
                         <button
                             aria-label="Editar avatar"
                             className="profile__image-edit-button"
@@ -57,14 +50,14 @@ function handleClosePopup() {
                         </button>
                     </div>
                     <div className="profile__info">
-                        <h1 className="profile__title">Jacques Cousteau</h1>
+                        <h1 className="profile__title">{contextValue?.name}</h1>
                         <button
                             aria-label="Editar perfil"
                             className="profile__edit-button"
                             type="button"
                             onClick={() => handleOpenPopup(editProfilePopup)}>
                         </button>
-                        <p className="profile__description">Explorador</p>
+                        <p className="profile__description">{contextValue?.about}</p>
                     </div>
                     <button
                         aria-label="Agregar tarjeta"
