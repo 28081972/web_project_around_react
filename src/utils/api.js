@@ -116,6 +116,11 @@ removeLike(cardId) {
   })
 }
 
+changeLikeCardStatus(cardId, isLiked) {
+    return isLiked ? this.addLike(cardId) : this.removeLike(cardId);
+   
+}
+
 removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
     method: "DELETE",

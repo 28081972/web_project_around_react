@@ -3,13 +3,28 @@ import ImagePopup from "../ImagePopup/ImagePopup";
 import RemoveCard from "../RemoveCard/RemoveCard";
 
 export default function Card(props) {
+  console.log(props);
 
   const {name, link, isLiked} = props.card;
-  const {handleOpenPopup} = props
+  const {handleOpenPopup} = props;
+  const {onCardLike} = props;
+  const {onCardDelete} = props;
+  const {onClose} = props;
   const imageComponent = {name:name, link:link};
   const imagePopup = {children: <ImagePopup card={imageComponent}/>};
-  const removeCard = {title: "¿Estás seguro/a?",children: <RemoveCard/>};
- 
+  const removeCard = {title: "¿Estás seguro/a?",children: <RemoveCard onCardDelete={handleDeleteClick} closePopup={onClose}/>};
+  const cardLikeButtonClassName = `card__like-button ${
+  isLiked ? 'card__like-button_is-active' : ''
+}`;
+
+function handleLikeClick() {
+  console.log("click", props.card);
+  onCardLike(props.card)
+}
+
+function handleDeleteClick() {
+  onCardDelete(props.card._id)
+}
   
   
   return (
@@ -28,8 +43,8 @@ export default function Card(props) {
         <h2 className="card__title">{name}</h2>
         <button
           aria-label="Botón Me gusta"
-          className= {`card__like-button ${isLiked ? "card__like-button_is-active" : ""}`}
-          type="button"
+          className= {cardLikeButtonClassName}
+          type="button" onClick={handleLikeClick}
         ></button>
       </div>
     </li>
