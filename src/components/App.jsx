@@ -11,18 +11,29 @@ function App() {
   const [currentUser, setCurrentUser] = useState();
 
     useEffect(() => {
-        api.getUserInfo()
-        .then((data) => {
-            console.log(data);
-            setCurrentUser(data);
+      api.getUserInfo()
+        .then((data) => {  
+          console.log(data);         
+        setCurrentUser(data);
+        
         });
     }, []);
-console.log(currentUser);
+
+function handleUpdateUser (formdata) {
+  console.log(formdata)
+  api.profileUserEdit(formdata)
+  .then((data) => {
+    console.log(data);
+    setCurrentUser(data)    
+  })
+
+}    
+
   return (
     
     <div className="page">
        <div className="page__content">
-        <CurrentUserContext.Provider value={currentUser}>
+        <CurrentUserContext.Provider value={{currentUser, handleUpdateUser}}>
         <Header/>
         <Main/>
         <Footer/>

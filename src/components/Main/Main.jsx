@@ -16,13 +16,12 @@ function Main () {
     useEffect(() => {
         api.getInitialCards()
         .then((data) => {
-            console.log(data);
             setCards(data);
         });
     }, []);
 
-   const contextValue = useContext(CurrentUserContext);
-    console.log(contextValue);
+   const {currentUser} = useContext(CurrentUserContext);
+    
 
     const [popup, setPopup]  = useState(null);
 
@@ -39,10 +38,10 @@ function handleClosePopup() {
 }
 
 async function handleCardLike(card) {
-    // Verifica una vez más si a esta tarjeta ya les has dado like
+    
     const isLiked = card.isLiked;
     
-    // Envía una solicitud a la API y obtén los datos actualizados de la tarjeta
+   
     await api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
     }).catch((error) => console.error(error));
@@ -60,7 +59,7 @@ function handleCardDelete (cardId) {
             <main className="content">
                 <section className="profile page__section">
                     <div className="profile__avatar">
-                        <img className="profile__image" src={contextValue?.avatar} alt="Avatar"/>
+                        <img className="profile__image" src={currentUser?.avatar} alt="Avatar"/>
                         <button
                             aria-label="Editar avatar"
                             className="profile__image-edit-button"
@@ -69,14 +68,14 @@ function handleCardDelete (cardId) {
                         </button>
                     </div>
                     <div className="profile__info">
-                        <h1 className="profile__title">{contextValue?.name}</h1>
+                        <h1 className="profile__title">{currentUser?.name}</h1>
                         <button
                             aria-label="Editar perfil"
                             className="profile__edit-button"
                             type="button"
                             onClick={() => handleOpenPopup(editProfilePopup)}>
                         </button>
-                        <p className="profile__description">{contextValue?.about}</p>
+                        <p className="profile__description">{currentUser?.about}</p>
                     </div>
                     <button
                         aria-label="Agregar tarjeta"
