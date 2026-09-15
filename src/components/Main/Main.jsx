@@ -9,52 +9,21 @@ import {api} from '../../utils/api';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 
-function Main () {
+function Main (props) {
+    console.log(props);
 
-    const [cards, setCards] = useState([]);
-
-    useEffect(() => {
-        api.getInitialCards()
-        .then((data) => {
-            setCards(data);
-        });
-    }, []);
+    
 
    const {currentUser} = useContext(CurrentUserContext);
     
 
-    const [popup, setPopup]  = useState(null);
-
+   
     const newCardPopup = {title: "Nuevo Lugar", children: <NewCard/>};
     const editProfilePopup = {title: "Editar Perfil", children: <EditProfile/>};
     const editAvatarPopup = {title: "Cambiar foto de perfil", children: <EditAvatar/>};
     
-function handleOpenPopup(popup) {
-    setPopup(popup);
-}    
 
-function handleClosePopup() {
-    setPopup(null);
-}
 
-async function handleCardLike(card) {
-    
-    const isLiked = card.isLiked;
-    
-   
-    await api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-        setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
-    }).catch((error) => console.error(error));
-}
-
-function handleCardDelete (cardId) { 
-    api.removeCard(cardId)
-    .then((data) => {setCards((data) => {
-        const newListCards = data.filter((card)=>
-            { return card._id!==cardId })
-        return newListCards })
-})
-}
     return(
             <main className="content">
                 <section className="profile page__section">
@@ -64,7 +33,7 @@ function handleCardDelete (cardId) {
                             aria-label="Editar avatar"
                             className="profile__image-edit-button"
                             type="button" 
-                            onClick= {() => handleOpenPopup(editAvatarPopup)}>
+                            onClick= {() => props.handleOpenPopup(editAvatarPopup)}>
                         </button>
                     </div>
                     <div className="profile__info">
@@ -73,7 +42,7 @@ function handleCardDelete (cardId) {
                             aria-label="Editar perfil"
                             className="profile__edit-button"
                             type="button"
-                            onClick={() => handleOpenPopup(editProfilePopup)}>
+                            onClick={() => props.handleOpenPopup(editProfilePopup)}>
                         </button>
                         <p className="profile__description">{currentUser?.about}</p>
                     </div>
@@ -81,23 +50,23 @@ function handleCardDelete (cardId) {
                         aria-label="Agregar tarjeta"
                         className="profile__add-button"
                         type="button"
-                        onClick={() => handleOpenPopup(newCardPopup)}>
+                        onClick={() => props.handleOpenPopup(newCardPopup)}>
                     </button>
                 </section>
           
                 <section className="cards page__section">
                     <ul className="cards__list">
-                        {cards.map ((card) => (
-                            <Card key={card._id} card={card} isLiked={card.isLiked} handleOpenPopup={handleOpenPopup} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onClose={handleClosePopup} />
+                        {props.cards.map ((card) => (
+                            <Card key={card._id} card={card} isLiked={card.isLiked} handleOpenPopup={props.handleOpenPopup} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete} onClose={props.handleClosePopup} />
                         ))}
             
                     </ul>
                 </section>
 
-                {popup && (
+                {props.popup && (
                    
-                    <Popup onClose={handleClosePopup} title={popup.title}>
-                        {popup.children}
+                    <Popup onClose={props.handleClosePopup} title={props.popup.title}>
+                        {props.popup.children}
                     </Popup>
                     
                 )}
@@ -107,7 +76,6 @@ function handleCardDelete (cardId) {
                 
             </main>
         
-    )
-}
+)}
 
 export default Main
