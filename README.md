@@ -1,9 +1,9 @@
 # Tripleten web_project_around_react
 
 ## Descripción
-Around es una aplicación web desarrollada con React como parte de la culminación del sprint 13 de TripleTen.
+Around es una aplicación web desarrollada con React como parte de la culminación del sprint 14 de TripleTen.
 
-El proyecto consiste en una red social sencilla, donde los usuarios pueden visualizar un perfil y una colección de tarjetas con imágenes y titulos.
+El proyecto consiste en una red social sencilla, donde los usuarios pueden visualizar y editar su perfil, asi como interactuar con una colección de tarjetas con imágenes y titulos.
 
 ## Funcionalidades actuales
 Actualmente la aplicación cuenta con las siguientes funcionalidades:
@@ -16,8 +16,11 @@ Actualmente la aplicación cuenta con las siguientes funcionalidades:
 - Botón para modificar el avatar
 - Apertura y cierre de los modales correspondientes
 - Renderizado de tarjetas con imágenes y titulos
+- Apertura y cierre de los modales correspondientes.
+- Validación de los formularios.
+- Deshabilitación de los botones de envío cuando los datos no son válidos.
+- Indicadores de carga durante las solicitudes a la API.
 
-Aun está pendiente la implementación de las funcionalidades de los modales y tarjetas.
 
 ## Estructura del proyecto
 El proyecto esta siendo migrado de la versión original en JavaScript a React.
@@ -30,6 +33,14 @@ Los principales componentes utilizados son:
 - Popup
 - ImagePopup
 - Footer
+
+## Tecnologías utilizadas
+- React
+- JavaScript
+- HTML
+- CSS
+- API REST
+- Vite
 
 ## Ejecución del proyecto
 Para ejecutar el proyecto localmente:
