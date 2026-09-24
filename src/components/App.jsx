@@ -12,35 +12,28 @@ function App() {
 
     useEffect(() => {
       api.getUserInfo()
-        .then((data) => {  
-          console.log(data);         
+        .then((data) => {    
         setCurrentUser(data);
-        
         });
     }, []);
 
 function handleUpdateUser (formdata) {
-  console.log(formdata)
-  api.profileUserEdit(formdata)
-  .then((data) => {
-    console.log(data);
+  return api.profileUserEdit(formdata)
+    .then((data) => {
     setCurrentUser(data) 
     handleClosePopup();   
   })
-
 }    
 
 function handleUpdateAvatar(formData) {
-  console.log(formData);
-  api.updateAvatar(formData)
+  return api.updateAvatar(formData)
   .then ((data) => {
-    console.log(data);
     setCurrentUser(data);
     handleClosePopup();
   });
 }
 
- const [popup, setPopup]  = useState(null);
+const [popup, setPopup]  = useState(null);
 
 function handleOpenPopup(popup) {
   setPopup(popup);
@@ -55,19 +48,17 @@ const [cards, setCards] = useState([]);
     useEffect(() => {
         api.getInitialCards()
         .then((data) => {
-          console.log(data);
-            setCards(data);
+          setCards(data);
         });
     }, []);
 
-async function handleCardLike(card) {
+function handleCardLike(card) {
         
-        const isLiked = card.isLiked;
-        
-       
-  await api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-            setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
-        }).catch((error) => console.error(error));
+  const isLiked = card.isLiked; 
+      api.changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+        })
     }
     
 function handleCardDelete (cardId) { 
@@ -80,16 +71,9 @@ function handleCardDelete (cardId) {
     }
 
 function handleAddPlaceSubmit(formData) {
-  console.log(formData);
-  api.addNewCard(formData)
+  return api.addNewCard(formData)
   .then((data) => {
-    console.log("A");
-    console.log(data);
-    console.log("B");
-    console.log(cards);
-    console.log("C");
     setCards([data, ...cards])
-    console.log("voy a cerrar");
     handleClosePopup();
   });
 }

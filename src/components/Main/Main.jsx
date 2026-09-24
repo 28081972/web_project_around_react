@@ -10,20 +10,12 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 
 function Main (props) {
-    console.log(props);
-
     
-
    const {currentUser} = useContext(CurrentUserContext);
-    
-
+   const newCardPopup = {title: "Nuevo Lugar", children: <NewCard/>};
+   const editProfilePopup = {title: "Editar Perfil", children: <EditProfile/>};
+   const editAvatarPopup = {title: "Cambiar foto de perfil", children: <EditAvatar/>};
    
-    const newCardPopup = {title: "Nuevo Lugar", children: <NewCard/>};
-    const editProfilePopup = {title: "Editar Perfil", children: <EditProfile/>};
-    const editAvatarPopup = {title: "Cambiar foto de perfil", children: <EditAvatar/>};
-    
-
-
     return(
             <main className="content">
                 <section className="profile page__section">

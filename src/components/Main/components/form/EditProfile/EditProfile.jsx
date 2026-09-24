@@ -1,29 +1,34 @@
 import {useState, useContext} from 'react';
 import { CurrentUserContext } from '../../../../../contexts/CurrentUserContext';
 
+
+
 function EditProfile () {
 
 const {currentUser, handleUpdateUser} = useContext(CurrentUserContext)
-console.log(currentUser, handleUpdateUser)
-
 const [name, setName] = useState(currentUser.name);
-console.log("name state", name);
 const [description, setDescription] =useState(currentUser.about);
-console.log("description state", description);
+const [validation, setValidation] = useState ({name: true, description: true, nameMessage:" ", descriptionMessage: " "})
+const [send, setSend] = useState(false);
 
 
-function handleChangeName (event) {
+function handleNameChange (event) {
   setName(event.target.value)
+  setValidation({...validation, name: event.target.validity.valid, nameMessage: event.target.validationMessage});
 }
 
-function handleChangeDescription (event) {
+function handleDescriptionChange (event) {
   setDescription(event.target.value)
+  setValidation({...validation, description: event.target.validity.valid, descriptionMessage: event.target.validationMessage});
 }
 
 function handleSubmit (event) {
   event.preventDefault();
-  handleUpdateUser({name: name, about: description})
-
+  setSend(true);
+  const answer = handleUpdateUser({name: name, about: description});
+   answer.finally(() => {
+    setSend(false);
+  });
 }
 
 
@@ -41,13 +46,13 @@ function handleSubmit (event) {
               required
               minLength="2"
               maxLength="40"
-              onChange={handleChangeName}
+              onChange={handleNameChange}
               value={name}
 
             />
             
-            <span className="popup__input-error name-input-error"
-            id="profile-name-error"></span>
+            <span className={validation.name === false ? "popup__input-error name-input-error" : ""} 
+            id="profile-name-error">{validation.nameMessage}</span>
           </label>  
 
             <label>
@@ -60,15 +65,15 @@ function handleSubmit (event) {
               required
               minLength="2"
               maxLength="200"
-              onChange={handleChangeDescription}
+              onChange={handleDescriptionChange}
               value={description}
             />
             
-            <span className="popup__input-error description-input-error"
-            id="profile-description-error"></span>
+            <span className={validation.description === false ? "popup__input-error description-input-error" : ""}
+            id="profile-description-error">{validation.descriptionMessage}</span>
           </label>  
 
-            <button className="button popup__button" type="submit" >Guardar</button>
+            <button className="button popup__button" type="submit" disabled={(validation.name === false) || (validation.description === false)} >{send === false ? "Guardar" : "Guardando..."}</button>
           </form>
 
     )
